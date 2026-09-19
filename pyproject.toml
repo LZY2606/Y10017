@@ -1,0 +1,77 @@
+[project]
+name = "pypika-tortoise"
+dynamic = ["version"]
+description = "Forked from pypika and streamline just for tortoise-orm"
+authors = [{name="long2ice", email="long2ice@gmail.com"}]
+license = {text="Apache-2.0"}
+readme = "README.md"
+keywords = ["postgresql", "Tortoise-ORM", "mysql", "sqlite", "sql"]
+requires-python = ">=3.9"
+
+[project.urls]
+homepage = "https://github.com/tortoise/pypika-tortoise"
+repository = "https://github.com/tortoise/pypika-tortoise.git"
+documentation = "https://github.com/tortoise/pypika-tortoise"
+
+[tool.poetry]
+packages = [
+    { include = "pypika_tortoise" }
+]
+version = "0.0.0"
+
+[tool.pdm]
+version = {source="file", path="pypika_tortoise/__init__.py"}
+
+[dependency-groups]
+dev = [
+    "ruff",
+    "mypy",
+    "bandit",
+    "twine",
+    "typing-extensions; python_version < '3.11'",
+]
+test=[
+    "pytest",
+    "pytest-cov",
+    "pytest-xdist",
+]
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[tool.pdm.build]
+excludes = ["./**/.git", "./**/.*_cache"]
+include = ["CHANGELOG.md", "LICENSE", "README.md"]
+
+[tool.mypy]
+pretty = true
+python_version = "3.9"
+warn_unused_ignores = true
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+extend-select = [
+    "I",      # https://docs.astral.sh/ruff/rules/#isort-i
+    "FA",     # https://docs.astral.sh/ruff/rules/#flake8-future-annotations-fa
+    "UP",     # https://docs.astral.sh/ruff/rules/#pyupgrade-up
+    "RUF100", # https://docs.astral.sh/ruff/rules/#ruff-specific-rules-ruf
+]
+ignore = ["UP031", "UP032"] # https://docs.astral.sh/ruff/rules/printf-string-formatting/
+
+[tool.ruff.lint.per-file-ignores]
+'pypika_tortoise/__init__.py' = ['F401']
+
+[tool.bandit]
+exclude_dirs = ["tests", "conftest.py"]
+
+[tool.coverage.report]
+show_missing = true
+exclude_also = [
+    "pragma: no cover",
+    "if TYPE_CHECKING:",
+    "@overload",
+    'if __name == "__main__":',
+]
