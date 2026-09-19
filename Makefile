@@ -3,6 +3,18 @@ checkfiles = $(src_dir) tests/ conftest.py
 py_warn = PYTHONDEVMODE=1
 pytest_opts = -n auto --cov=$(src_dir) --cov-append --cov-branch --tb=native -q
 
+# Fixed epoch so that release artifacts (sdist/wheel) are reproducible.
+export SOURCE_DATE_EPOCH ?= 1700000000
+
+verify:
+	@CHECKFILES="$(checkfiles)" bash scripts/verify.sh full
+
+verify-quick:
+	@CHECKFILES="$(checkfiles)" bash scripts/verify.sh quick
+
+repro-digest:
+	@bash scripts/repro-digest.sh
+
 up:
 	@uv lock --upgrade
 

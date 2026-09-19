@@ -16,6 +16,21 @@ The original repository includes many databases that Tortoise ORM doesn’t requ
 Deleted unnecessary code that Tortoise ORM doesn’t require, added features tailored specifically for Tortoise ORM,
 and modified to improve query generation performance.
 
+## Development
+
+Only [uv](https://docs.astral.sh/uv/) is required. On a clean machine, two commands set up
+the environment and run the full quality gate chain (the same one CI runs):
+
+```bash
+make deps    # create the environment and install all dev dependencies
+make verify  # run the full gate chain: lock, format, lint, types, security,
+             # tests (every supported Python version), build, repro, package, clean
+```
+
+`make verify-quick` runs the same chain but only tests the lowest and highest supported
+Python versions, without coverage. `make repro-digest` prints the reproducible content
+digest of the sdist.
+
 ## ThanksTo
 
 - [pypika](https://github.com/kayak/pypika), a Python SQL query builder that exposes the full expressiveness of SQL,

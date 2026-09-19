@@ -42,7 +42,7 @@ build-backend = "pdm.backend"
 
 [tool.pdm.build]
 excludes = ["./**/.git", "./**/.*_cache"]
-include = ["CHANGELOG.md", "LICENSE", "README.md"]
+source-includes = ["CHANGELOG.md", "LICENSE", "README.md", "tests"]
 
 [tool.mypy]
 pretty = true
