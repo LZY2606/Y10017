@@ -42,7 +42,7 @@ build-backend = "pdm.backend"
 
 [tool.pdm.build]
 excludes = ["./**/.git", "./**/.*_cache"]
-include = ["CHANGELOG.md", "LICENSE", "README.md"]
+includes = ["pypika_tortoise", "CHANGELOG.md", "LICENSE", "README.md"]
 
 [tool.mypy]
 pretty = true

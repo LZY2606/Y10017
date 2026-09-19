@@ -21,6 +21,24 @@ and modified to improve query generation performance.
 - [pypika](https://github.com/kayak/pypika), a Python SQL query builder that exposes the full expressiveness of SQL,
 using a syntax that mirrors the resulting query structure.
 
+## Development
+
+On a clean machine with only [uv](https://docs.astral.sh/uv/) installed, create the
+development environment and run the complete quality gate with two commands:
+
+```shell
+uv sync --all-groups
+make verify
+```
+
+`make verify` runs the same gate chain CI runs — lock check, formatting, lint, types,
+security scan, the test matrix for every Python version allowed by `requires-python`
+(3.9–3.13), build, reproducible sdist, package checks and cleanup — and stops at the
+first failing gate. For a fast local pass use `make verify-quick`, which only tests the
+lowest and highest supported Python versions, in parallel and without coverage.
+`make repro-digest` prints one line with the content digest of the sdist; identical
+source always yields the same line.
+
 ## License
 
 This project is licensed under the [Apache-2.0](./LICENSE) License.

@@ -7,7 +7,17 @@ up:
 	@uv lock --upgrade
 
 deps:
-	uv sync --active --inexact --all-groups --all-extras
+	uv sync --inexact --all-groups --all-extras
+
+.PHONY: verify verify-quick repro-digest
+verify:
+	@./scripts/verify.sh
+
+verify-quick:
+	@./scripts/verify.sh quick
+
+repro-digest:
+	@./scripts/repro_sdist.sh digest
 
 codeqc:
 	mypy $(checkfiles)
